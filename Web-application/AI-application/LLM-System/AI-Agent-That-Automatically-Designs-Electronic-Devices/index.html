@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ericli.life","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="🤖 Circuit Aide — AI-Powered Hardware Design AgentOverview Circuit Aide is an AI-powered hardware design agent that helps users transform an idea into a complete, practical electronic device. https:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Agent That Automatically Designs Electronic Devices">
+<meta property="og:url" content="http://ericli.life/Web-application/AI-application/LLM-System/AI-Agent-That-Automatically-Designs-Electronic-Devices/index.html">
+<meta property="og:site_name" content="Eric Li&#39;s Blog">
+<meta property="og:description" content="🤖 Circuit Aide — AI-Powered Hardware Design AgentOverview Circuit Aide is an AI-powered hardware design agent that helps users transform an idea into a complete, practical electronic device. https:&#x2F;&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/circuitaide_index.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/circuitaide-UI.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_dia.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_BOM.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_firmware.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_3D.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_steps.png">
+<meta property="og:image" content="http://ericli.life/images/circuitaide/hobby_drone_adv.png">
+<meta property="article:published_time" content="2026-08-21T11:01:49.000Z">
+<meta property="article:modified_time" content="2026-08-29T12:56:37.197Z">
+<meta property="article:author" content="Eric Li">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ericli.life/images/circuitaide/circuitaide_index.png">
+
+<link rel="canonical" href="http://ericli.life/Web-application/AI-application/LLM-System/AI-Agent-That-Automatically-Designs-Electronic-Devices/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>AI Agent That Automatically Designs Electronic Devices | Eric Li's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a target="_blank" rel="noopener" href="https://github.com/liwei03116" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Eric Li's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life, Engineer, Traveling and share everything!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section"><i class="fa fa-file fa-fw"></i>resume</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://ericli.life/Web-application/AI-application/LLM-System/AI-Agent-That-Automatically-Designs-Electronic-Devices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myprofile.jpeg">
+      <meta itemprop="name" content="Eric Li">
+      <meta itemprop="description" content="Coding, Thinking, Outcoming and Enjoying">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric Li's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI Agent That Automatically Designs Electronic Devices
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-21 21:01:49" itemprop="dateCreated datePublished" datetime="2026-08-21T21:01:49+10:00">2026-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-08-29 22:56:37" itemprop="dateModified" datetime="2026-08-29T22:56:37+10:00">2026-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-application/" itemprop="url" rel="index"><span itemprop="name">Web application</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-application/AI-application/" itemprop="url" rel="index"><span itemprop="name">AI application</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-application/AI-application/LLM-System/" itemprop="url" rel="index"><span itemprop="name">LLM System</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>🤖 Circuit Aide — AI-Powered Hardware Design Agent<br>Overview</p>
+<p>Circuit Aide is an AI-powered hardware design agent that helps users transform an idea into a complete, practical electronic device.</p>
+<p><a target="_blank" rel="noopener" href="https://circuitaide.com/">https://circuitaide.com/</a></p>
+<p>Instead of requiring users to independently research components, design circuits, write firmware, develop mechanical enclosures, and document assembly procedures, Circuit Aide brings these activities together into a unified, AI-assisted hardware development workflow.</p>
+<span id="more"></span>
+
+<img src="/images/circuitaide/circuitaide_index.png" class="" width="550" title="Index Circuit aide home page">
+
+<p>Users describe the device they want to build in natural language. Circuit Aide then helps translate those requirements into an interconnected set of engineering outputs, including:</p>
+<p>Circuit architecture and schematics<br>Component recommendations and Bill of Materials (BOM)<br>Embedded firmware<br>3D mechanical models<br>Step-by-step assembly instructions</p>
+<p>The goal is to reduce the complexity of hardware development while maintaining a workflow that can scale from early experimentation to more advanced engineering projects.</p>
+<img src="/images/circuitaide/circuitaide-UI.png" class="" width="550" title="Circuit aide UI page">
+
+<p>💡 From Idea to Complete Device</p>
+<p>Circuit Aide is designed to support the complete hardware development lifecycle:</p>
+<p>Idea → Requirements → Circuit → Components → Firmware → Mechanical Design → Assembly → Working Device</p>
+<p>A user can provide as much detail as required, including:</p>
+<p>Device functionality<br>Electrical requirements<br>Performance targets<br>Component preferences<br>Size and form-factor constraints<br>Power requirements<br>Communication interfaces<br>Environmental constraints<br>Cost targets<br>Manufacturing considerations</p>
+<p>Circuit Aide uses this information to develop a coherent hardware design and generate the supporting artifacts required to build and evaluate the device.</p>
+<p>🧑‍💻 Development Modes</p>
+<p>Circuit Aide supports different levels of technical depth depending on the user’s experience and project requirements.</p>
+<p>Hobbyist</p>
+<p>A simplified workflow intended for:</p>
+<p>Makers<br>Students<br>First-time hardware developers<br>Experimenters<br>DIY electronics enthusiasts</p>
+<p>The Hobbyist experience prioritizes accessibility, clear explanations, practical component choices, and guided assembly.</p>
+<p>Advanced</p>
+<p>A more detailed workflow intended for:</p>
+<p>Experienced hardware developers<br>Embedded engineers<br>Electronics engineers<br>Professional product developers</p>
+<p>The Advanced experience can expose greater technical detail, design constraints, engineering assumptions, and implementation considerations.</p>
+<p>⚡ Hardware Design Outputs</p>
+<p>Each Circuit Aide project is composed of multiple interconnected outputs. Rather than treating the schematic, firmware, BOM, and mechanical design as independent artifacts, the system aims to keep them consistent with the same underlying device requirements and architecture.</p>
+<ol>
+<li>🔌 Circuit Architecture &amp; Diagram</li>
+</ol>
+<p>Circuit Aide generates a structured representation of the electronic system and organizes it into functional blocks.</p>
+<p>For example, a drone design may be decomposed into:</p>
+<p>Controller<br>Sensors<br>Power Management<br>Communication<br>Actuators<br>Supporting Circuitry</p>
+<p>This block-oriented architecture provides a high-level understanding of the system before moving into individual component connections.</p>
+<img src="/images/circuitaide/hobby_drone_dia.png" class="" width="550" title="Hobby drone diagram">
+
+<p>The resulting circuit representation helps users understand:</p>
+<p>What each subsystem does<br>Which components interact<br>How power is distributed<br>How signals flow through the system<br>How major functional blocks are interconnected</p>
+<p>The objective is to make complex electronics easier to inspect, modify, and implement.</p>
+<ol start="2">
+<li>🧰 Components &amp; Bill of Materials</li>
+</ol>
+<p>Circuit Aide generates a component list and Bill of Materials (BOM) corresponding to the proposed design.</p>
+<img src="/images/circuitaide/hobby_drone_BOM.png" class="" width="550" title="Hobby drone BOM">
+
+<p>The BOM can include:</p>
+<p>Field Description<br>Component Name of the required part<br>Type Resistor, MCU, sensor, regulator, connector, etc.<br>Recommendation Suggested chip or component<br>Description Short technical description<br>Quantity Number of required units<br>Estimated Price Approximate component cost<br>Role Purpose of the component within the system</p>
+<p>The BOM is intended to answer two fundamental questions:</p>
+<p>What do I need to build this device?<br>Why is each component required?</p>
+<p>Component selection can take into account the project’s functional requirements, constraints, and development level.</p>
+<ol start="3">
+<li>💻 Firmware</li>
+</ol>
+<p>Circuit Aide can generate firmware corresponding to the proposed hardware architecture.</p>
+<p>Instead of beginning with an empty development environment, users receive an initial implementation based on the selected microcontroller, peripherals, sensors, communication interfaces, and other hardware defined by the design.</p>
+<img src="/images/circuitaide/hobby_drone_firmware.png" class="" width="550" title="Hobby drone firmware">
+
+<p>Generated firmware may include functionality such as:</p>
+<p>Hardware initialization<br>GPIO configuration<br>Sensor interfaces<br>Communication protocols<br>Control logic<br>Peripheral drivers<br>Device configuration<br>Main application logic</p>
+<p>The firmware is intended to provide a starting point that users can inspect, test, modify, and extend.</p>
+<ol start="4">
+<li>🧊 3D Mechanical Model</li>
+</ol>
+<p>Circuit Aide extends beyond electronic design into the physical construction of the device.</p>
+<p>The system can generate a 3D representation of the proposed enclosure or device structure, allowing users to visualize the relationship between the electronics and the physical form factor.</p>
+<img src="/images/circuitaide/hobby_drone_3D.png" class="" width="550" title="Hobby drone 3D">
+
+<p>The underlying mechanical design is provided as OpenSCAD-compatible code, enabling users to:</p>
+<p>Modify dimensions<br>Adjust mounting features<br>Change enclosure geometry<br>Customize the physical appearance<br>Adapt the design for different components<br>Export the model for further manufacturing workflows</p>
+<p>This creates a direct connection between electrical architecture and mechanical product design.</p>
+<ol start="5">
+<li>🔧 Build Instructions</li>
+</ol>
+<p>Circuit Aide converts the generated design into a practical assembly workflow.</p>
+<img src="/images/circuitaide/hobby_drone_steps.png" class="" width="550" title="Hobby drone steps">
+
+<p>Build instructions can guide users through:</p>
+<p>Obtaining the required components<br>Preparing the electronics<br>Assembling individual subsystems<br>Connecting components and modules<br>Installing the generated firmware<br>Configuring the device<br>Completing mechanical assembly<br>Testing the completed system</p>
+<p>The objective is to turn the generated design into an actionable build process rather than leaving the user with only a schematic and component list.</p>
+<p>🤖 AI Model &amp; Tool Ecosystem</p>
+<p>Circuit Aide is designed as a flexible AI development environment rather than being dependent on a single AI provider.</p>
+<p>The platform can integrate general-purpose AI models and specialized hardware-development tools across different stages of the workflow.</p>
+<p>Potential AI capabilities include:</p>
+<p>ChatGPT<br>Claude<br>Gemini<br>Flux AI<br>Cursor<br>Copilot</p>
+<p>Specialized hardware and simulation tools can also be incorporated, including:</p>
+<p>Circuit Mind<br>Wokwi</p>
+<p>This architecture allows different models and tools to be applied to different tasks instead of forcing the entire workflow through a single AI system.</p>
+<p>🧠 Default AI Model</p>
+<p>Google Gemini is the default AI model used by Circuit Aide.</p>
+<p>Users can also provide their own API keys when they prefer to use their own AI accounts, billing arrangements, models, or configurations.</p>
+<p>This provides flexibility for both individual users and more advanced development environments.</p>
+<img src="/images/circuitaide/hobby_drone_adv.png" class="" width="550" title="Hobby drone Advanced">
+
+<p>🔗 End-to-End Hardware Development</p>
+<p>Traditional hardware development requires engineers to work across multiple specialized domains.</p>
+<p>A single device may require knowledge of:</p>
+<p>Electronic circuit design<br>Component selection<br>Schematic development<br>PCB design<br>Embedded programming<br>Power management<br>Communication protocols<br>Mechanical design<br>Enclosure development<br>Manufacturing<br>Assembly and testing</p>
+<p>Circuit Aide aims to connect these domains through a single AI-assisted workflow.</p>
+<p>Instead of treating each engineering activity as an isolated task, Circuit Aide creates a chain of related outputs derived from the same project requirements.</p>
+<p>User Requirements<br>│<br>▼<br>System Architecture<br>│<br>├───────────────┐<br>▼ ▼<br>Circuit Design Components &#x2F; BOM<br>│ │<br>├───────┬───────┘<br>▼ ▼<br>Firmware Mechanical Design<br>│ │<br>└───┬───┘<br>▼<br>Build Instructions<br>│<br>▼<br>Working Device</p>
+<p>This architecture is intended to reduce context switching and make the transition between engineering disciplines more seamless.</p>
+<p>💬 User Experience</p>
+<p>Circuit Aide is designed around a natural-language-first interaction model.</p>
+<p>A user can start with a simple description such as:</p>
+<p>“I want to build a small environmental monitor that measures temperature, humidity, and air quality, displays the results, and runs from a rechargeable battery.”</p>
+<p>The system can then progressively translate that idea into engineering requirements, architecture, components, firmware, mechanical design, and assembly instructions.</p>
+<p>Users can refine the design by adding constraints or changing requirements at any stage.</p>
+<p>For example:</p>
+<p>Change the microcontroller<br>Reduce the target cost<br>Add wireless connectivity<br>Increase battery life<br>Change the enclosure dimensions<br>Replace a sensor<br>Add a display<br>Modify the operating voltage</p>
+<p>The design can then be regenerated or updated around those requirements.</p>
+<p>🎯 Design Philosophy</p>
+<p>Circuit Aide is built around several core principles.</p>
+<p>Accessibility</p>
+<p>Hardware development should not require users to master every engineering discipline before they can build something.</p>
+<p>Integration</p>
+<p>Circuit design, software, component selection, mechanical design, and assembly should be connected rather than treated as isolated workflows.</p>
+<p>Explainability</p>
+<p>Generated designs should communicate not only what was selected, but also why components and architectural decisions are being used.</p>
+<p>Iteration</p>
+<p>Hardware development is inherently iterative. Users should be able to modify requirements and rapidly explore alternative designs.</p>
+<p>Practicality</p>
+<p>The final output should be useful for building a real prototype, not merely producing a conceptual design.</p>
+<p>Extensibility</p>
+<p>Advanced users should be able to inspect, modify, and export the generated artifacts rather than being locked into an opaque workflow.</p>
+<p>❓ Why Circuit Aide?</p>
+<p>Existing electronics design platforms and AI-assisted hardware tools can be highly effective at individual stages of development. However, building a complete device typically requires users to move between multiple specialized applications and workflows.</p>
+<p>Circuit Aide takes a broader approach.</p>
+<p>Rather than focusing primarily on circuit design, it aims to provide an end-to-end AI hardware development environment.</p>
+<p>The central workflow is:</p>
+<p>Describe the device you want to build, and Circuit Aide helps turn that description into a complete hardware project.</p>
+<p>The system connects:</p>
+<p>Requirements → Architecture → Circuit → BOM → Firmware → 3D Model → Assembly</p>
+<p>This approach allows beginners to enter hardware development through natural language while giving experienced engineers a unified environment for accelerating early-stage design and prototyping.</p>
+<p>👥 Target Users</p>
+<p>Circuit Aide is intended for a broad range of hardware developers.</p>
+<p>User Primary Value<br>Hobbyists Guided development from idea to prototype<br>Students Practical learning across electronics and embedded systems<br>Makers Faster experimentation and project development<br>Engineers Accelerated architecture and implementation workflows<br>Hardware Startups Faster prototyping and design iteration<br>Product Developers Unified electronic and mechanical development<br>🚀 Product Vision</p>
+<p>Circuit Aide aims to become an AI hardware design agent for everyone—from someone building their first electronic project to professional engineers developing sophisticated connected devices.</p>
+<p>The long-term vision is to make hardware development feel less like navigating a collection of disconnected engineering tools and more like collaborating with an intelligent engineering assistant.</p>
+<p>A user provides the requirements.</p>
+<p>Circuit Aide helps:</p>
+<p>Reason about the architecture<br>Select components<br>Generate implementation artifacts<br>Explain the design<br>Guide the user toward a physical prototype<br>From an idea in natural language to a complete, buildable device.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Coding/" rel="tag"># Coding</a>
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Car/Road-trip/Mechanical-electrical/Toyota-2012-Yaris-fog-light-install/" rel="prev" title="Toyota 2012 Yaris fog light install">
+      <i class="fa fa-chevron-left"></i> Toyota 2012 Yaris fog light install
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eric Li"
+      src="/images/myprofile.jpeg">
+  <p class="site-author-name" itemprop="name">Eric Li</p>
+  <div class="site-description" itemprop="description">Coding, Thinking, Outcoming and Enjoying</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liwei03116" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liwei03116" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liwei03116@yahoo.com" title="E-Mail → mailto:liwei03116@yahoo.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/li.wei.9085" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;li.wei.9085" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/eric-li-82488775/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;eric-li-82488775&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eric Li</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div><script color="0,0,0" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script type="text/javascript" src="dist/canvas-nest.js"></script>
+</body>
+</html>
